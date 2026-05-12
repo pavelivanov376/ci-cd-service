@@ -13,6 +13,8 @@ public class RepositoryEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
+    @NotBlank(message = "URL must not be blank")
+    @URL(message = "Must be a valid URL")
     @Column(nullable = false, unique = true)
     private String url;
 
