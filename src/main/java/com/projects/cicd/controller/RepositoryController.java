@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/repositories")
@@ -28,6 +29,12 @@ public class RepositoryController {
     @GetMapping
     public ResponseEntity<Collection<RepositoryResponse>> getAll() {
         return ResponseEntity.ok(repositoryService.getAll());
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
+        repositoryService.delete(uuid);
+        return ResponseEntity.noContent().build();
     }
 
 }

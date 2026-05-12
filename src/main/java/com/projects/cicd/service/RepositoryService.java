@@ -7,6 +7,7 @@ import com.projects.cicd.repository.RepositoryEntityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 public class RepositoryService {
@@ -28,5 +29,9 @@ public class RepositoryService {
         return repositoryEntityRepository.findAll().stream()
                 .map(RepositoryResponse::new)
                 .toList();
+    }
+
+    public void delete(UUID uuid) {
+        repositoryEntityRepository.deleteById(uuid);
     }
 }
