@@ -12,9 +12,11 @@ import java.util.UUID;
 public class SecretService {
 
     private final SecretRepository secretRepository;
+    private final EncryptionService encryptionService;
 
-    public SecretService(SecretRepository secretRepository) {
+    public SecretService(SecretRepository secretRepository, EncryptionService encryptionService) {
         this.secretRepository = secretRepository;
+        this.encryptionService = encryptionService;
     }
 
     public SecretResponse create(SecretRequest request) {
@@ -22,7 +24,7 @@ public class SecretService {
         SecretEntity secretEntity = new SecretEntity();
         secretEntity.setName(request.getName())
                 .setType(request.getType())
-                .setEncryptedValue(request.getValue()); //TODO: Encrypt the value before saving
+                .setEncryptedValue(encryptionService.encrypt(request.getValue()));
 
         SecretEntity saved = secretRepository.save(secretEntity);
 
