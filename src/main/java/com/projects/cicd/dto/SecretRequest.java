@@ -4,6 +4,8 @@ import com.projects.cicd.entity.SecretType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.UUID;
+
 public class SecretRequest {
 
     @NotBlank(message = "Name must not be blank")
@@ -14,6 +16,9 @@ public class SecretRequest {
 
     @NotBlank(message = "Value must not be blank")
     private String value;
+
+    @NotNull(message = "Repository ID must not be null")
+    private UUID repositoryId;
 
     public String getName() {
         return name;
@@ -39,6 +44,15 @@ public class SecretRequest {
 
     public SecretRequest setValue(String value) {
         this.value = value;
+        return this;
+    }
+
+    public UUID getRepositoryId() {
+        return repositoryId;
+    }
+
+    public SecretRequest setRepositoryId(UUID repositoryId) {
+        this.repositoryId = repositoryId;
         return this;
     }
 }

@@ -5,6 +5,7 @@ import com.projects.cicd.dto.RepositoryResponse;
 import com.projects.cicd.entity.RepositoryEntity;
 import com.projects.cicd.repository.RepositoryEntityRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class RepositoryService {
         return new RepositoryResponse(savedRepository);
     }
 
+    @Transactional(readOnly = true)
     public Collection<RepositoryResponse> getAll() {
         return repositoryEntityRepository.findAll().stream()
                 .map(RepositoryResponse::new)

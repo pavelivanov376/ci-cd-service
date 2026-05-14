@@ -27,6 +27,10 @@ public class SecretEntity {
     @Column(nullable = false)
     private String encryptedValue;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "repository_id", nullable = false)
+    private RepositoryEntity repository;
+
     public UUID getId() {
         return id;
     }
@@ -60,6 +64,15 @@ public class SecretEntity {
 
     public SecretEntity setEncryptedValue(String encryptedValue) {
         this.encryptedValue = encryptedValue;
+        return this;
+    }
+
+    public RepositoryEntity getRepository() {
+        return repository;
+    }
+
+    public SecretEntity setRepository(RepositoryEntity repository) {
+        this.repository = repository;
         return this;
     }
 }

@@ -10,6 +10,8 @@ public class SecretResponse {
     private UUID id;
     private String name;
     private SecretType type;
+    private UUID repositoryId;
+    private String repositoryUrl;
 
     public SecretResponse() {
     }
@@ -18,6 +20,10 @@ public class SecretResponse {
         this.id = secretEntity.getId();
         this.name = secretEntity.getName();
         this.type = secretEntity.getType();
+        if (secretEntity.getRepository() != null) {
+            this.repositoryId = secretEntity.getRepository().getUuid();
+            this.repositoryUrl = secretEntity.getRepository().getUrl();
+        }
     }
 
     public UUID getId() {
@@ -44,6 +50,24 @@ public class SecretResponse {
 
     public SecretResponse setType(SecretType type) {
         this.type = type;
+        return this;
+    }
+
+    public UUID getRepositoryId() {
+        return repositoryId;
+    }
+
+    public SecretResponse setRepositoryId(UUID repositoryId) {
+        this.repositoryId = repositoryId;
+        return this;
+    }
+
+    public String getRepositoryUrl() {
+        return repositoryUrl;
+    }
+
+    public SecretResponse setRepositoryUrl(String repositoryUrl) {
+        this.repositoryUrl = repositoryUrl;
         return this;
     }
 }
