@@ -1,0 +1,21 @@
+<mvc:View
+        controllerName="cicd.controller.Repository"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m">
+
+    <Page title="Repositories">
+        <Table id="repositoryTable" items="{repositories>/items}">
+            <columns>
+                <Column><Text text="URL"/></Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{repositories>url}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+
+</mvc:View>
