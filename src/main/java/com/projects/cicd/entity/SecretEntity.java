@@ -75,4 +75,8 @@ public class SecretEntity {
         this.repository = repository;
         return this;
     }
+
+    public String getAuthPrefix() {
+        return type.getAuthPrefix();
+    }
 }

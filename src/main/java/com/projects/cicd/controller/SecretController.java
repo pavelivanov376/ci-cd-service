@@ -2,6 +2,7 @@ package com.projects.cicd.controller;
 
 import com.projects.cicd.dto.SecretRequest;
 import com.projects.cicd.dto.SecretResponse;
+import com.projects.cicd.dto.ValidateSecretResponse;
 import com.projects.cicd.service.SecretService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -30,4 +31,10 @@ public class SecretController {
         secretService.delete(uuid);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{uuid}/validate")
+    public ResponseEntity<ValidateSecretResponse> validate(@PathVariable UUID uuid) {
+        return ResponseEntity.ok(secretService.validate(uuid));
+    }
+
 }
