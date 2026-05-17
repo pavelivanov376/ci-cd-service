@@ -1,9 +1,10 @@
 <mvc:View
         controllerName="cicd.controller.Repository"
         xmlns:mvc="sap.ui.core.mvc"
-        xmlns="sap.m">
+        xmlns="sap.m"
+        xmlns:f="sap.f">
 
-    <Page>
+    <Page class="sapUiResponsiveContentPadding">
         <headerContent>
             <Button
                     text="Add Repository"
@@ -12,38 +13,43 @@
                     press=".onAddRepository"/>
         </headerContent>
 
-        <Table id="repositoryTable" items="{repositories>/items}">
-            <columns>
-                <Column width="70%">
-                    <Text text="URL"/>
-                </Column>
-                <Column width="30%" hAlign="End">
-                    <Text text="Actions"/>
-                </Column>
-            </columns>
-            <items>
-                <ColumnListItem>
-                    <cells>
-                        <Link text="{repositories>url}"
-                            href="{repositories>url}"
-                            target="_blank"/>
-                        <HBox justifyContent="End" alignItems="Center">
-                            <Button
-                                    text="Add Secret"
-                                    type="Default"
-                                    icon="sap-icon://add"
-                                    press=".onAddSecret"
-                                    class="sapUiTinyMarginEnd"/>
-                            <Button
-                                    text="Delete"
-                                    type="Reject"
-                                    icon="sap-icon://delete"
-                                    press=".onDeleteRepository"/>
-                        </HBox>
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+        <content>
+            <f:Card width="100%">
+                <f:content>
+                    <Table id="repositoryTable" items="{repositories>/items}">
+                        <columns>
+                            <Column width="70%">
+                                <Text text="URL"/>
+                            </Column>
+                            <Column width="30%" hAlign="End">
+                                <Text text="Actions"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Link text="{repositories>url}"
+                                          href="{repositories>url}"
+                                          target="_blank"/>
+                                    <HBox justifyContent="End" alignItems="Center">
+                                        <Button
+                                                text="Add Secret"
+                                                type="Default"
+                                                icon="sap-icon://key"
+                                                press=".onAddSecret"
+                                                class="sapUiTinyMarginEnd"/>
+                                        <Button
+                                                type="Reject"
+                                                icon="sap-icon://delete"
+                                                press=".onDeleteRepository"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </f:content>
+            </f:Card>
+        </content>
     </Page>
 
 </mvc:View>

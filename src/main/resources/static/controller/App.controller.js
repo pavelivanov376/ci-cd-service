@@ -22,7 +22,7 @@ sap.ui.define([
 
             if (routeName === "repositories") {
                 viewModel.setProperty("/selectedTab", "repositories");
-            } else if (sRouteName === "secrets") {
+            } else if (routeName === "secrets") {
                 viewModel.setProperty("/selectedTab", "secrets");
             }
         },
