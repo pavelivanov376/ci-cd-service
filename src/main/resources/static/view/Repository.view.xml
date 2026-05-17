@@ -4,14 +4,34 @@
         xmlns="sap.m">
 
     <Page title="Repositories">
+        <headerContent>
+            <Button
+                    text="Add Repository"
+                    type="Emphasized"
+                    icon="sap-icon://add"
+                    press=".onAddRepository"/>
+        </headerContent>
+
         <Table id="repositoryTable" items="{repositories>/items}">
             <columns>
-                <Column><Text text="URL"/></Column>
+                <Column width="70%">
+                    <Text text="URL"/>
+                </Column>
+                <Column width="30%" hAlign="End">
+                    <Text text="Actions"/>
+                </Column>
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
-                        <Text text="{repositories>url}"/>
+                        <Link text="{repositories>url}"
+                            href="{repositories>url}"
+                            target="_blank"/>
+                        <Button
+                            text="Delete"
+                            type="Reject"
+                            icon="sap-icon://delete"
+                            press=".onDeleteRepository"/>
                     </cells>
                 </ColumnListItem>
             </items>
