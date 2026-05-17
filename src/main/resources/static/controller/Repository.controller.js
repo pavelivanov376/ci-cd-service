@@ -14,6 +14,9 @@ sap.ui.define([
         onInit: function() {
             this.getView().setModel(new JSONModel({ items: [] }), "repositories");
             this._loadRepositories();
+
+            const router = this.getOwnerComponent().getRouter();
+            router.getRoute("repositories").attachPatternMatched(this._loadRepositories, this);
         },
 
         onAddRepository: function () {

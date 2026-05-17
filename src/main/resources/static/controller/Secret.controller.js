@@ -13,6 +13,9 @@ sap.ui.define([
         onInit: function () {
             this.getView().setModel(new JSONModel({ items: [] }), "secrets");
             this._loadSecrets();
+
+            const router = this.getOwnerComponent().getRouter();
+            router.getRoute("secrets").attachPatternMatched(this._loadSecrets, this);
         },
 
         _loadSecrets: function() {
