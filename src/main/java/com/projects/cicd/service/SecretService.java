@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @Service
@@ -46,6 +47,13 @@ public class SecretService {
 
         SecretEntity saved = secretRepository.save(secretEntity);
         return new SecretResponse(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<SecretResponse> getAll() {
+        return secretRepository.findAll().stream()
+                .map(SecretResponse::new)
+                .toList();
     }
 
     public void delete(UUID id) {

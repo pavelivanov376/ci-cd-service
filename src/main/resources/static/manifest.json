@@ -26,12 +26,21 @@
           "name": "repositories",
           "pattern": "",
           "target": "repositories"
+        },
+        {
+          "name": "secrets",
+          "pattern": "/secrets",
+          "target": "secrets"
         }
       ],
       "targets": {
         "repositories": {
           "id": "repositories",
           "name": "Repository"
+        },
+        "secrets": {
+          "id": "secrets",
+          "name": "Secret"
         }
       }
     }

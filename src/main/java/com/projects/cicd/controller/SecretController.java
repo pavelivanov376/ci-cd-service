@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -24,6 +25,11 @@ public class SecretController {
     @PostMapping
     public ResponseEntity<SecretResponse> create(@Valid @RequestBody SecretRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(secretService.create(request));
+    }
+
+    @GetMapping
+    public ResponseEntity<Collection<SecretResponse>> getAll() {
+        return ResponseEntity.ok(secretService.getAll());
     }
 
     @DeleteMapping("/{uuid}")
