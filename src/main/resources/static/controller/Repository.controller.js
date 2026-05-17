@@ -2,17 +2,12 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "sap/m/MessageBox",
-    "sap/m/Dialog",
-    "sap/m/Button",
-    "sap/m/Input",
-    "sap/m/VBox",
-    "sap/m/Label",
-    "sap/m/Text"
-], function (Controller, JSONModel, MessageToast, MessageBox, Dialog, Button, Input, VBox, Label, Text) {
+    "sap/m/MessageBox"
+], function (Controller, JSONModel, MessageToast, MessageBox) {
     "use strict";
 
     const API_BASE = "/api/repositories";
+    const SECRETS_API_BASE = "/api/secrets";
 
     return Controller.extend("cicd.controller.Repository", {
 
@@ -97,10 +92,79 @@ sap.ui.define([
 
         _loadRepositories: function() {
             fetch(API_BASE)
-                .then(r => r.json())
+                .then(response => response.json())
                 .then(data => {
                     this.getView().getModel("repositories").setProperty("/items", data);
                 });
+        },
+
+        onAddSecret: function (event) {
+            const repository = event.getSource().getBindingContext("repositories").getObject();
+            this._currentRepositoryId = repository.uuid;
+
+            if (!this._addSecretDialog) {
+                this._addSecretDialog = this.loadFragment({
+                    name: "cicd.view.AddSecretDialog"
+                });
+            }
+
+            this._addSecretDialog.then(dialog => dialog.open());
+        },
+
+        onConfirmAddSecret: function () {
+            const nameInput = this.byId("nameInput");
+            const name = nameInput.getValue().trim();
+            if (!name) {
+                nameInput.setValueState("Error");
+                nameInput.setValueStateText("Name is required");
+                return;
+            }
+
+            const valueInput = this.byId("valueInput");
+            const value = valueInput.getValue().trim();
+            const type = this.byId("typeSelect").getSelectedKey();
+            if (!value) {
+                valueInput.setValueState("Error");
+                valueInput.setValueStateText("Value is required");
+                return;
+            }
+
+            nameInput.setValueState("None");
+            valueInput.setValueState("None");
+
+            fetch(SECRETS_API_BASE, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name,
+                    type,
+                    value,
+                    repositoryId: this._currentRepositoryId
+                })
+            })
+                .then(response => {
+                    if (!response.ok) return response.json()
+                        .then(e => { throw new Error(e.error); });
+                    return response.json();
+                })
+                .then(() => {
+                    this._closeSecretDialog();
+                    MessageToast.show("Secret added successfully");
+                })
+                .catch(error => {
+                    MessageBox.error("Could not add secret: " + error.message);
+                });
+        },
+
+        onCancelAddSecret: function () {
+            this._closeSecretDialog();
+        },
+
+        _closeSecretDialog: function () {
+            this.byId("addSecretDialog").close();
+            this.byId("nameInput").setValue("").setValueState("None");
+            this.byId("valueInput").setValue("").setValueState("None");
+            this.byId("typeSelect").setSelectedItem(null);
         }
     });
 });

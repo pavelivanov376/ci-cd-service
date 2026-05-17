@@ -27,11 +27,18 @@
                         <Link text="{repositories>url}"
                             href="{repositories>url}"
                             target="_blank"/>
-                        <Button
-                            text="Delete"
-                            type="Reject"
-                            icon="sap-icon://delete"
-                            press=".onDeleteRepository"/>
+                        <HBox justifyContent="End" alignItems="Center">
+                            <Button
+                                    text="Add Secret"
+                                    type="Default"
+                                    icon="sap-icon://add"
+                                    press=".onAddSecret"/>
+                            <Button
+                                    text="Delete"
+                                    type="Reject"
+                                    icon="sap-icon://delete"
+                                    press=".onDeleteRepository"/>
+                        </HBox>
                     </cells>
                 </ColumnListItem>
             </items>
