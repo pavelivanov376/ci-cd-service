@@ -3,7 +3,7 @@
         xmlns:mvc="sap.ui.core.mvc"
         xmlns="sap.m">
 
-    <Page title="Repositories">
+    <Page>
         <headerContent>
             <Button
                     text="Add Repository"
@@ -32,7 +32,8 @@
                                     text="Add Secret"
                                     type="Default"
                                     icon="sap-icon://add"
-                                    press=".onAddSecret"/>
+                                    press=".onAddSecret"
+                                    class="sapUiTinyMarginEnd"/>
                             <Button
                                     text="Delete"
                                     type="Reject"

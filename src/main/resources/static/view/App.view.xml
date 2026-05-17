@@ -1,8 +1,28 @@
 <mvc:View
+        controllerName="cicd.controller.App"
         xmlns:mvc="sap.ui.core.mvc"
         xmlns="sap.m"
         displayBlock="true">
 
-    <App id="appPages"/>
+    <App id="appPages">
+        <Page title="CI/CD Service">
+            <IconTabHeader
+                    id="iconTabHeader"
+                    select=".onTabSelect"
+                    selectedKey="{/selectedTab}">
+                <items>
+                    <IconTabFilter
+                            key="repositories"
+                            text="Repositories"/>
+                    <IconTabFilter
+                            key="secrets"
+                            text="Secrets"/>
+                </items>
+            </IconTabHeader>
+            <content>
+                <NavContainer id="navContainer"/>
+            </content>
+        </Page>
+    </App>
 
 </mvc:View>

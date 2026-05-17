@@ -17,7 +17,7 @@
         "type": "View",
         "viewType": "XML",
         "path": "cicd.view",
-        "controlId": "appPages",
+        "controlId": "navContainer",
         "controlAggregation": "pages",
         "async": true
       },
@@ -29,7 +29,7 @@
         },
         {
           "name": "secrets",
-          "pattern": "/secrets",
+          "pattern": "secrets",
           "target": "secrets"
         }
       ],
