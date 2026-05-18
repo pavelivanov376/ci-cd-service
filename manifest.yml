@@ -1,0 +1,11 @@
+---
+applications:
+  - name: ci-cd-service
+    memory: 1G
+    disk_quota: 512M
+    instances: 1
+    path: target/ci-cd-service-0.0.1-SNAPSHOT.jar
+    buildpacks:
+      - java_buildpack
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'
