@@ -6,7 +6,10 @@
 
     <App id="appPages">
         <Page title="CI/CD Service">
-            <IconTabHeader id="iconTabHeader">
+            <IconTabHeader
+                    id="iconTabHeader"
+                    select=".onTabSelect"
+                    selectedKey="{/selectedTab}">
                 <items>
                     <IconTabFilter
                             key="repositories"
